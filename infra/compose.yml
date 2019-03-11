@@ -1,0 +1,87 @@
+version: "3.6"
+
+services:
+  percona:
+    image: percona:5.7.25
+    command:
+      - "mysqld"
+      - "--max-connections=1000"
+      - "--innodb_buffer_pool_size=2G"
+      - "--innodb_log_file_size=1G"
+      - "--innodb_flush_method=O_DIRECT"
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_USER=internal
+      - MYSQL_PASSWORD=dev
+      - MYSQL_DATABASE=test
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels: [DB=MYSQL]
+
+  redis:
+    image: redis:5.0.3-alpine
+    command:
+      - "redis-server"
+      - "--appendonly yes"
+      - "--requirepass dev"
+      - "--maxmemory 256mb"
+      - "--maxmemory-policy volatile-lru"
+    ports:
+      - "6379:6379"
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels: [DB=REDIS]
+
+  parity:
+    image: parity/parity:v2.4.0
+    command:
+      - "--config=dev"
+      - "--port=30304"
+      - "--jsonrpc-port=8645"
+      - "--ws-port=8646"
+      - "--reseal-min-period=0"
+      - "--min-gas-price=0"
+      - "--unsafe-expose"
+    ports:
+      - "8645:8645"
+      - "8646:8646"
+      - "30304:30304"
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels: [DB=PARITY]
+
+  postgres:
+    image: postgres:11.2-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=internal
+      - POSTGRES_PASSWORD=dev
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels: [DB=POSTGRES]
+
+  cockroachdb:
+    image: cockroachdb/cockroach:v2.1.5
+    command:
+      - start
+      - --insecure
+    ports:
+      - "26257:26257"
+      - "8080:8080"
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels: [DB=COCKROACHDB]
+# Usage
+# docker stack deploy --compose-file=infra/compose.yml storage;
+
+# To create your own DB, for example dev
+# CONTAINER_NAME=$(docker container ls --format '{{.Names}}' | grep percona) && docker exec -i $CONTAINER_NAME mysql -u root -e "DROP DATABASE IF EXISTS dev;CREATE DATABASE dev;GRANT ALL PRIVILEGES ON dev.* TO 'internal'@'%';";
+
