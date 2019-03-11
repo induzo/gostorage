@@ -1,10 +1,12 @@
-# gostorage [![Go Report Card](https://goreportcard.com/badge/github.com/induzo/gostorage)](https://goreportcard.com/report/github.com/induzo/gostorage) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ef8b36bfc33e468cae3168b58ee05680)](https://www.codacy.com/app/vincent_11/gostorage?utm_source=github.com&utm_medium=referral&utm_content=induzo/gostorage&utm_campaign=Badge_Grade)
+# Go storage
+
+[![Documentation](https://godoc.org/github.com/induzo/gostorage?status.svg)](http://godoc.org/github.com/induzo/gostorage) [![Go Report Card](https://goreportcard.com/badge/github.com/induzo/gostorage)](https://goreportcard.com/report/github.com/induzo/gostorage) [![Maintainability](https://api.codeclimate.com/v1/badges/0fbcaef0d1a5ddb41690/maintainability)](https://codeclimate.com/github/induzo/gostorage/maintainability)
 
 init of different storage conn pool
 
 ## Prerequisites
 
-- [go](https://golang.org/dl/) (tested on 1.10.3)
+- [go](https://golang.org/dl/) (tested on 1.12.0)
 - [gometalinter](https://github.com/alecthomas/gometalinter)
 - [docker](https://www.docker.com/get-docker)
 
