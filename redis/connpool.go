@@ -29,7 +29,7 @@ func NewConnPool(redisConf Config) (*redis.Pool, error) {
 			if redisConf.Password != "" {
 				if _, errDo := c.Do("AUTH", redisConf.Password); errDo != nil {
 					err2 := c.Close()
-					return nil, fmt.Errorf("redis: %v, close err? %v", err, err2)
+					return nil, fmt.Errorf("redis: %v, close err? %v", errDo, err2)
 				}
 			}
 			return c, err
