@@ -7,8 +7,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-func TestNewConnPool(t *testing.T) {
-
+func TestNewConnPool(t *testing.T) { //nolint:funlen
 	tests := []struct {
 		name           string
 		postgresDBConf Config
@@ -40,7 +39,7 @@ func TestNewConnPool(t *testing.T) {
 				Port:     "5432",
 				User:     "internal",
 				Password: "dev",
-				DbName:   "test",
+				DBName:   "test",
 			},
 			wantErr: true,
 		},
@@ -51,7 +50,7 @@ func TestNewConnPool(t *testing.T) {
 				Port:     "5432",
 				User:     "internal",
 				Password: "dev",
-				DbName:   "test",
+				DBName:   "test",
 				SSLConf: SSLConf{
 					CertPath:     "/test",
 					KeyPath:      "/test",
@@ -88,7 +87,7 @@ func Test_getDSN(t *testing.T) {
 				Port:     "5432",
 				User:     "internal",
 				Password: "dev",
-				DbName:   "test",
+				DBName:   "test",
 			},
 			want: "postgres://internal:dev@none:5432/test?sslmode=disable",
 		},
@@ -99,7 +98,7 @@ func Test_getDSN(t *testing.T) {
 				Port:     "5432",
 				User:     "internal",
 				Password: "dev",
-				DbName:   "test",
+				DBName:   "test",
 				SSLConf: SSLConf{
 					CertPath:     "/test",
 					KeyPath:      "/test",

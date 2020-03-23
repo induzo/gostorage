@@ -2,7 +2,7 @@ version: "3.6"
 
 services:
   percona:
-    image: percona:5.7.25
+    image: percona:8
     command:
       - "mysqld"
       - "--max-connections=1000"
@@ -22,7 +22,7 @@ services:
       labels: [DB=MYSQL]
 
   redis:
-    image: redis:5.0.3-alpine
+    image: redis:5.0.8-alpine
     command:
       - "redis-server"
       - "--appendonly yes"
@@ -37,7 +37,7 @@ services:
       labels: [DB=REDIS]
 
   parity:
-    image: parity/parity:v2.4.0
+    image: parity/parity:v2.7.2-stable
     command:
       - "--config=dev"
       - "--port=30304"
@@ -56,7 +56,7 @@ services:
       labels: [DB=PARITY]
 
   postgres:
-    image: postgres:11.2-alpine
+    image: postgres:12.2-alpine
     ports:
       - "5432:5432"
     environment:
@@ -68,7 +68,7 @@ services:
       labels: [DB=POSTGRES]
 
   cockroachdb:
-    image: cockroachdb/cockroach:v2.1.5
+    image: cockroachdb/cockroach:v19.2.4
     command:
       - start
       - --insecure

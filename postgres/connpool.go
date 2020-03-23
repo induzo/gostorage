@@ -15,7 +15,7 @@ type Config struct {
 	Port     string
 	User     string
 	Password string
-	DbName   string
+	DBName   string
 	SSLConf
 }
 
@@ -28,7 +28,6 @@ type SSLConf struct {
 
 // NewConnPool connects to db and return a connection pool
 func NewConnPool(postgresDBConf Config) (*sqlx.DB, error) {
-
 	pool, err := sqlx.Open("postgres", getDSN(postgresDBConf))
 	if err != nil {
 		return nil, fmt.Errorf("NewConnPool: sqlx.Open %v", err)
@@ -48,7 +47,7 @@ func getDSN(c Config) string {
 		c.Password + "@" +
 		c.Host + ":" +
 		c.Port + "/" +
-		c.DbName
+		c.DBName
 
 	// Secure connection?
 	ssl := "?sslmode=disable"

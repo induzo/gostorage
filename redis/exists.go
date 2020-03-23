@@ -10,6 +10,7 @@ import (
 // Exists return true if key is present
 func Exists(rp *redis.Pool, key string) (bool, error) {
 	red := rp.Get()
+
 	defer func() {
 		if err := red.Close(); err != nil {
 			log.Fatalf("Exists(%v) Close: %v", key, err)
@@ -20,6 +21,7 @@ func Exists(rp *redis.Pool, key string) (bool, error) {
 	if err != nil {
 		return false, fmt.Errorf("Exists GET(%s): %v", key, err)
 	}
+
 	if rawBytes == nil {
 		return false, nil
 	}

@@ -11,6 +11,7 @@ import (
 // after exp millisecond
 func SetKeyWithExpiration(rp *redis.Pool, key string, exp int64) error {
 	red := rp.Get()
+
 	defer func() {
 		if err := red.Close(); err != nil {
 			log.Fatalf("SetKeyWithExpiration(%s, %d) Close: %v", key, exp, err)
@@ -23,5 +24,6 @@ func SetKeyWithExpiration(rp *redis.Pool, key string, exp int64) error {
 			key, exp, err,
 		)
 	}
+
 	return nil
 }

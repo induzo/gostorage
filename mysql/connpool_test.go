@@ -7,7 +7,6 @@ import (
 )
 
 func TestNewConnPool(t *testing.T) {
-
 	tests := []struct {
 		name        string
 		mysqlDBConf Config
@@ -21,7 +20,7 @@ func TestNewConnPool(t *testing.T) {
 				Port:     "3306",
 				User:     "internal",
 				Password: "dev",
-				DbName:   "test",
+				DBName:   "test",
 			},
 			wantErr: false,
 		},
@@ -33,7 +32,7 @@ func TestNewConnPool(t *testing.T) {
 				Port:     "3306",
 				User:     "internal",
 				Password: "badtest",
-				DbName:   "badtest",
+				DBName:   "badtest",
 			},
 			wantErr: true,
 		},

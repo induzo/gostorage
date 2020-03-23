@@ -10,6 +10,7 @@ import (
 // Consume will check if a key exists and if it exists, will destroy it
 func Consume(rp *redis.Pool, key string) error {
 	red := rp.Get()
+
 	defer func() {
 		if err := red.Close(); err != nil {
 			log.Fatalf("Exists(%v) Close: %v", key, err)
@@ -20,6 +21,7 @@ func Consume(rp *redis.Pool, key string) error {
 	if err != nil {
 		return fmt.Errorf("Exists GET(%s): %v", key, err)
 	}
+
 	if rawBytes == nil {
 		return fmt.Errorf("Exists content(%s): %v", key, err)
 	}

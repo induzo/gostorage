@@ -15,12 +15,15 @@ type Config struct {
 	MaxActiveConnections int
 }
 
+const MaxIdleConn = 3
+const IdleTimeout = 240 * time.Second
+
 // NewConnPool connects to redis and return a connection pool
 func NewConnPool(redisConf Config) (*redis.Pool, error) {
 	redPool := &redis.Pool{
-		MaxIdle:     3,
+		MaxIdle:     MaxIdleConn,
 		MaxActive:   redisConf.MaxActiveConnections,
-		IdleTimeout: 240 * time.Second,
+		IdleTimeout: IdleTimeout,
 		Dial: func() (redis.Conn, error) {
 			c, err := redis.Dial("tcp", redisConf.Host+":"+redisConf.Port)
 			if err != nil {
@@ -50,7 +53,9 @@ func NewConnPool(redisConf Config) (*redis.Pool, error) {
 // ConnPoolPing allows a check on redis server status
 func ConnPoolPing(redPool *redis.Pool) error {
 	var err error
+
 	red := redPool.Get()
+
 	defer func() {
 		err = red.Close()
 	}()

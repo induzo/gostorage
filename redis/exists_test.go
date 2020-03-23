@@ -5,7 +5,6 @@ import (
 )
 
 func TestExists(t *testing.T) {
-
 	redPool, _ := NewConnPool(Config{
 		Host:                 "127.0.0.1",
 		Port:                 "6379",
@@ -16,6 +15,7 @@ func TestExists(t *testing.T) {
 		t.Errorf("Do(SET(): %v", err)
 		return
 	}
+
 	if _, err := redPool.Get().Do("SET", "12", "-"); err != nil {
 		t.Errorf("Do(SET(): %v", err)
 		return
@@ -60,5 +60,4 @@ func TestExists(t *testing.T) {
 			}
 		})
 	}
-
 }

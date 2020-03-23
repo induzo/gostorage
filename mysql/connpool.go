@@ -16,7 +16,7 @@ type Config struct {
 	Port     string
 	User     string
 	Password string
-	DbName   string
+	DBName   string
 }
 
 // NewConnPool connects to db and return a connection pool
@@ -26,7 +26,7 @@ func NewConnPool(mysqlDBConf Config) (*sqlx.DB, error) {
 		mysqlDBConf.Protocol + "(" +
 		mysqlDBConf.Host + ":" +
 		mysqlDBConf.Port + ")/" +
-		mysqlDBConf.DbName + "?parseTime=true&multiStatements=true"
+		mysqlDBConf.DBName + "?parseTime=true&multiStatements=true"
 
 	pool, err := sqlx.Open("mysql", dsn)
 	if err != nil {

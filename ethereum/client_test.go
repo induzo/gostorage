@@ -3,7 +3,6 @@ package ethereum
 import "testing"
 
 func TestNewRPCCli(t *testing.T) {
-
 	tests := []struct {
 		name    string
 		ethConf Config
@@ -63,7 +62,6 @@ func TestNewRPCCli(t *testing.T) {
 }
 
 func TestNewWSCli(t *testing.T) {
-
 	tests := []struct {
 		name    string
 		ethConf Config

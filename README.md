@@ -6,8 +6,8 @@ init of different storage conn pool
 
 ## Prerequisites
 
-- [go](https://golang.org/dl/) (tested on 1.12.0)
-- [gometalinter](https://github.com/alecthomas/gometalinter)
+- [go](https://golang.org/dl/) (tested on 1.14.1)
+- [golangci-lint](https://github.com/golangci/golangci-lint)
 - [docker](https://www.docker.com/get-docker)
 
 ## Run tests
@@ -20,4 +20,8 @@ init of different storage conn pool
 
 ## MySQL
 
+## Postgres
+
 ## Redis
+
+## Mongodb

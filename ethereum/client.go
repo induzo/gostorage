@@ -32,6 +32,7 @@ func NewRPCCli(ethConf Config) (*ethclient.Client, error) {
 	if errNID != nil {
 		return nil, fmt.Errorf("NewRPCCli: NetworkID %v", errNID)
 	}
+
 	if networkID.Int64() != ethConf.NetworkID {
 		return nil,
 			fmt.Errorf(
@@ -59,6 +60,7 @@ func NewWSCli(ethConf Config) (*ethclient.Client, error) {
 	if errNID != nil {
 		return nil, fmt.Errorf("NewWSCli: NetworkID %v", errNID)
 	}
+
 	if networkID.Int64() != ethConf.NetworkID {
 		return nil,
 			fmt.Errorf(
