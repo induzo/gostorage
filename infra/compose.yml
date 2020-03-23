@@ -74,11 +74,23 @@ services:
       - --insecure
     ports:
       - "26257:26257"
-      - "8080:8080"
     deploy:
       mode: replicated
       replicas: 1
       labels: [DB=COCKROACHDB]
+
+  mongo:
+    image: mongo:4.2.3-bionic
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: internal
+      MONGO_INITDB_ROOT_PASSWORD: dev
+      MONGO_INITDB_DATABASE: test
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels: [DB=MONGO]
 # Usage
 # docker stack deploy --compose-file=infra/compose.yml storage;
 
