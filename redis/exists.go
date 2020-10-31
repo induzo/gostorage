@@ -17,14 +17,10 @@ func Exists(rp *redis.Pool, key string) (bool, error) {
 		}
 	}()
 
-	rawBytes, err := red.Do("GET", key)
+	exists, err := redis.Bool(red.Do("EXISTS", key))
 	if err != nil {
 		return false, fmt.Errorf("Exists GET(%s): %v", key, err)
 	}
 
-	if rawBytes == nil {
-		return false, nil
-	}
-
-	return true, nil
+	return exists, nil
 }

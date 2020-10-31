@@ -1,0 +1,6 @@
+[linters]
+enable-all = true
+fast = true
+
+[issues]
+exclude-use-default = false

@@ -19,10 +19,9 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-      labels: [DB=MYSQL]
 
   redis:
-    image: redis:5.0.8-alpine
+    image: redis:6.0.9-alpine
     command:
       - "redis-server"
       - "--appendonly yes"
@@ -34,7 +33,6 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-      labels: [DB=REDIS]
 
   parity:
     image: parity/parity:v2.7.2-stable
@@ -53,10 +51,9 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-      labels: [DB=PARITY]
 
   postgres:
-    image: postgres:12.2-alpine
+    image: postgres:13-alpine
     ports:
       - "5432:5432"
     environment:
@@ -65,10 +62,9 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-      labels: [DB=POSTGRES]
 
   cockroachdb:
-    image: cockroachdb/cockroach:v19.2.4
+    image: cockroachdb/cockroach:v20.1.8
     command:
       - start
       - --insecure
@@ -77,10 +73,9 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-      labels: [DB=COCKROACHDB]
 
   mongo:
-    image: mongo:4.2.3-bionic
+    image: mongo:4.4.1-bionic
     ports:
       - "27017:27017"
     environment:
@@ -90,10 +85,8 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-      labels: [DB=MONGO]
 # Usage
 # docker stack deploy --compose-file=infra/compose.yml storage;
 
 # To create your own DB, for example dev
 # CONTAINER_NAME=$(docker container ls --format '{{.Names}}' | grep percona) && docker exec -i $CONTAINER_NAME mysql -u root -e "DROP DATABASE IF EXISTS dev;CREATE DATABASE dev;GRANT ALL PRIVILEGES ON dev.* TO 'internal'@'%';";
-
